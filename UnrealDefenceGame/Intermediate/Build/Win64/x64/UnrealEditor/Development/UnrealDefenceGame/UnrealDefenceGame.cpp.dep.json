@@ -1,0 +1,14 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "c:\\users\\me\\documents\\unreal projects\\unrealdefencegame\\unrealdefencegame\\source\\unrealdefencegame\\unrealdefencegame.cpp",
+        "ProvidedModule": "",
+        "PCH": "c:\\users\\me\\documents\\unreal projects\\unrealdefencegame\\unrealdefencegame\\intermediate\\build\\win64\\x64\\unrealdefencegameeditor\\development\\engine\\sharedpch.engine.shadowerrors.inclorderunreal5_1.h.pch",
+        "Includes": [
+            "c:\\users\\me\\documents\\unreal projects\\unrealdefencegame\\unrealdefencegame\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\unrealdefencegame\\definitions.unrealdefencegame.h",
+            "c:\\users\\me\\documents\\unreal projects\\unrealdefencegame\\unrealdefencegame\\source\\unrealdefencegame\\unrealdefencegame.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

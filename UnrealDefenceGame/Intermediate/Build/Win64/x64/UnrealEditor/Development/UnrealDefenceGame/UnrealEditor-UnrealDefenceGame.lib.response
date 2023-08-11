@@ -1,0 +1,17 @@
+/NOLOGO
+/errorReport:prompt
+/MACHINE:x64
+/SUBSYSTEM:WINDOWS
+/DEF
+/NAME:"UnrealEditor-UnrealDefenceGame.dll"
+/IGNORE:4221
+/NODEFAULTLIB
+"C:\Users\Me\Documents\Unreal Projects\UnrealDefenceGame\UnrealDefenceGame\Intermediate\Build\Win64\x64\UnrealDefenceGameEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.InclOrderUnreal5_1.h.obj"
+"C:\Users\Me\Documents\Unreal Projects\UnrealDefenceGame\UnrealDefenceGame\Intermediate\Build\Win64\x64\UnrealEditor\Development\UnrealDefenceGame\DGCameraPawn.gen.cpp.obj"
+"C:\Users\Me\Documents\Unreal Projects\UnrealDefenceGame\UnrealDefenceGame\Intermediate\Build\Win64\x64\UnrealEditor\Development\UnrealDefenceGame\UnrealDefenceGame.init.gen.cpp.obj"
+"C:\Users\Me\Documents\Unreal Projects\UnrealDefenceGame\UnrealDefenceGame\Intermediate\Build\Win64\x64\UnrealEditor\Development\UnrealDefenceGame\UnrealDefenceGameGameModeBase.gen.cpp.obj"
+"C:\Users\Me\Documents\Unreal Projects\UnrealDefenceGame\UnrealDefenceGame\Intermediate\Build\Win64\x64\UnrealEditor\Development\UnrealDefenceGame\DGCameraPawn.cpp.obj"
+"C:\Users\Me\Documents\Unreal Projects\UnrealDefenceGame\UnrealDefenceGame\Intermediate\Build\Win64\x64\UnrealEditor\Development\UnrealDefenceGame\UnrealDefenceGame.cpp.obj"
+"C:\Users\Me\Documents\Unreal Projects\UnrealDefenceGame\UnrealDefenceGame\Intermediate\Build\Win64\x64\UnrealEditor\Development\UnrealDefenceGame\UnrealDefenceGameGameModeBase.cpp.obj"
+"C:\Users\Me\Documents\Unreal Projects\UnrealDefenceGame\UnrealDefenceGame\Intermediate\Build\Win64\x64\UnrealEditor\Development\UnrealDefenceGame\Default.rc2.res"
+/OUT:"C:\Users\Me\Documents\Unreal Projects\UnrealDefenceGame\UnrealDefenceGame\Intermediate\Build\Win64\x64\UnrealEditor\Development\UnrealDefenceGame\UnrealEditor-UnrealDefenceGame.lib"

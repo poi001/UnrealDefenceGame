@@ -1,0 +1,8 @@
+{
+	"SourceFiles": [
+		"C:\\Users\\Me\\Documents\\Unreal Projects\\UnrealDefenceGame\\UnrealDefenceGame\\Source\\UnrealDefenceGame\\UnrealDefenceGame.Build.cs",
+		"C:\\Users\\Me\\Documents\\Unreal Projects\\UnrealDefenceGame\\UnrealDefenceGame\\Source\\UnrealDefenceGame.Target.cs",
+		"C:\\Users\\Me\\Documents\\Unreal Projects\\UnrealDefenceGame\\UnrealDefenceGame\\Source\\UnrealDefenceGameEditor.Target.cs"
+	],
+	"EngineVersion": "5.2.1"
+}
