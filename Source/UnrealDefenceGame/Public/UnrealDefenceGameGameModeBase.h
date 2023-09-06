@@ -14,4 +14,8 @@ class UNREALDEFENCEGAME_API AUnrealDefenceGameGameModeBase : public AGameModeBas
 {
 	GENERATED_BODY()
 	
+public:
+	AUnrealDefenceGameGameModeBase();
+
+	virtual void PostLogin(APlayerController* NewController) override;
 };

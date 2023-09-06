@@ -25,5 +25,27 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Mouse")
+	float CamSpeed;
+	UPROPERTY()
+	float Margine;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Mouse")
+	FVector StartLocation;
 
+private:
+	UPROPERTY()
+	class USceneComponent* RootScene;
+	UPROPERTY()
+	class USpringArmComponent* SpringArm;
+	UPROPERTY()
+	class UCameraComponent* Camera;
+	UPROPERTY()
+	class ADGPlayerController* DGPlayerController;
+
+	int32 ScreenSizeX;
+	int32 ScreenSizeY;
+
+	void OnClickedStartLocation();
+	FVector GetCameraPanningDirection();
 };
