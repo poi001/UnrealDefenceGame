@@ -80,36 +80,52 @@ void ADGCameraPawn::Tick(float DeltaTime)
 * `Lenth`: 배열의 번호를 담을 변수
 * `AIMoveTo`: 지정한 액터를 지정한 목표까지 이동시키는 노드
 
-위에 블루프린트를 설명하자면 좀비 소환되고 BPGoal이란 액터를 모두 찾아낸다.
-그 후, 첫번쨰 BPGoal로 움직이고 도착했다면 다음 BPGoal로 이동한다.
-참고로 BPGoal은 이 곳이 최종 도착지점인지 확인하는 bool타입의 변수가 있다. 그러므로 오류날 일이 없다.
+위에 블루프린트를 설명하자면 좀비 소환되고 BPGoal이란 액터를 모두 찾아냅니다.
+그 후, 첫번쨰 BPGoal로 움직이고 도착했다면 다음 BPGoal로 이동합니다.
+참고로 BPGoal은 이 곳이 최종 도착지점인지 확인하는 bool타입의 변수가 있습니다. 그러므로 오류날 일이 없습니다.
 
-추가적으로 AutoPossessAI의 설정을 PlacedInWorldOrSpawned로 설정해야지 소환됐을 때, 위 블루프린트가 작동한다.
+추가적으로 AutoPossessAI의 설정을 PlacedInWorldOrSpawned로 설정해야지 소환됐을 때, 위 블루프린트가 작동합니다.
 
 ### 타워 소환 (비동기 에셋 로딩)
 
-타워를 소환할 때, 비동기 에셋과 데이터 테이블을 이용하여 Mesh와 Material을 설정한다.
+타워를 소환할 때, 비동기 에셋과 데이터 테이블을 이용하여 Mesh와 Material을 설정합니다.
 
 ![image](https://github.com/poi001/UnrealDefenceGame/assets/107660181/cdcc8010-47a8-4f89-b283-c990ce07403e)
 
-해당 프로젝트 파일 경로로 가서 Config폴더에서 새로운 ini파일을 위와 같이 만든다. 타워의 메시와 머티리얼을 담는 내용이다.
+해당 프로젝트 파일 경로로 가서 Config폴더에서 새로운 ini파일을 위와 같이 만급니다. 타워의 메시와 머티리얼을 담는 내용입니다.
 
 `[/Script/UnrealDefenceGame.DGSetting]`: UnrealDefenceGame모듈에서 DGSetting파일을 경로를 지정한다 
 
-그 밑에 +연산자를 사용하여 TowerMesh에 스태틱매시의 경로들을 집어 넣는다.(1단계, 2단계, 3단계)
+그 밑에 +연산자를 사용하여 TowerMesh에 스태틱매시의 경로들을 집어 넣습니다.(1단계, 2단계, 3단계)
 
-TowerMaterialInstance에는 타워 타입마다의 머티리얼인스턴스의 경로들을 집어넣는다.(빨, 노, 초, 파, 검)
+TowerMaterialInstance에는 타워 타입마다의 머티리얼인스턴스의 경로들을 집어넣습니다.(빨, 노, 초, 파, 검)
 
 ![image](https://github.com/poi001/UnrealDefenceGame/assets/107660181/a56257c4-5cb9-4a3a-9e7e-6718ac51628d)
 
-UObject를 상속받은 UDGSetting이라는 클래스를 만든 후, FSoftObjectPath타입의 배열을 만든다. (FSoftObjectPath은 경로를 저장하는 타입)
+UObject를 상속받은 UDGSetting이라는 클래스를 만든 후, FSoftObjectPath타입의 배열을 만듭니다. (FSoftObjectPath은 경로를 저장하는 타입)
 
-* `UCLASS(config=Setting)`: config은 DefaultSetting.ini로 지정한다는 지정자이다.
-* `UPROPERTY(config)`: UPROPERTY안에 config를 지정했으므로 DefaultSetting.ini파일을 사용한다는 코드이다.
+* `UCLASS(config=Setting)`: config은 DefaultSetting.ini로 지정한다는 지정자입니다.
+* `UPROPERTY(config)`: UPROPERTY안에 config를 지정했으므로 DefaultSetting.ini파일을 사용한다는 코드입니다.
 
-위 코드들로 인해 TowerMesh와 TowerMaterialInstance에 DefaultSetting.ini에 적혀있는 경로들을 기입한다.
+위 코드들로 인해 TowerMesh와 TowerMaterialInstance에 DefaultSetting.ini에 적혀있는 경로들을 기입합니다.
 
 
+![image](https://github.com/poi001/UnrealDefenceGame/assets/107660181/7e09818e-dd5d-4257-a7e2-0342ce4f3d89)
+![image](https://github.com/poi001/UnrealDefenceGame/assets/107660181/c8e0d848-4c5f-435c-bc44-a51c8b6ffce3)
+위의 코드는 비동기 에셋을 활용하여 타워의 메시와 머티리얼을 설정하는 코드입니다.
+
+* `TowerMeshToLoad`: USetting->TowerMesh의 경로를 담는 FSoftObjectPath타입 변수
+* `TowerMaterialToLoad`: USetting->TowerMaterialInstance의 경로를 담는 FSoftObjectPath타입 변수
+* `DGGameInstance->StreamableManager.RequestAsyncLoad(TowerMeshToLoad,FStreamableDelegate::CreateUObject(this, &ADGTowerActor::OnMeshLoadCompleted))`:
+  TowerMeshToLoad가 준비가 됐으면 OnMeshLoadCompleted함수를 실행합니다.
+* `DGGameInstance->StreamableManager.RequestAsyncLoad(TowerMaterialToLoad,FStreamableDelegate::CreateUObject(this, &ADGTowerActor::OnMaterialLoadCompleted))`:
+  TowerMaterialToLoad가 준비가 됐으면 OnMaterialLoadCompleted함수를 실행합니다.
+
+OnMeshLoadCompleted함수와 OnMaterialLoadCompleted함수는 각각 타워의 메시와 머티리얼을 설정하는 함수입니다.
+
+비동기 에셋으로 인한 장점은 게임에서 발생하는 멈춤 현상이나 차지하는 메모리 양이 훨씬 줄어듭니다.
+
+단점은 메모리에 직접 접근하는 게임플레이 코드가 비동기 로드를 처리하도록 변환해 주는 작업에 시간이 조금 걸린다는 점입니다.
 
 ### 타워 공격 범위
 
