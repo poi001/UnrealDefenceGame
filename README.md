@@ -128,6 +128,32 @@ OnMeshLoadCompleted함수와 OnMaterialLoadCompleted함수는 각각 타워의 �
 단점은 메모리에 직접 접근하는 게임플레이 코드가 비동기 로드를 처리하도록 변환해 주는 작업에 시간이 조금 걸린다는 점입니다.
 
 ### 타워 공격 범위
+![image](https://github.com/poi001/UnrealDefenceGame/assets/107660181/cfec26d9-87b0-4db3-89cb-bcb126220df5)
 
+위 코드는 타워가 Tick함수가 호출될 때마다 감지하도록 짜여져있는 코드입니다.
 
-### 데이터 테이블
+내용은 적이 타워 탐지 범위 안에 들어와 있을 시(bIsDetected == true), 공격속도 만큼 탄환을 발사하고, 아닐 시에는 계속 탐지합니다.
+
+![image](https://github.com/poi001/UnrealDefenceGame/assets/107660181/4fe94664-3b8b-4615-82e9-9fefffa35cab)
+
+DetectedEnemy() 함수는 적이 탐지되었을 시에 호출되는 함수입니다. DetectingEnemy() 함수는 탐지 중일 때(탐지되지 않았을 시) 호출되는 함수입니다.
+
+DetectingEnemy는 OverlapMultiByChannel를 사용해 적을 탐지합니다. OverlapMultiByChannel의 인자들은 아래와 같습니다.
+
+* `bResult`: 적이 탐지 되었는 지 확인용 bool 변수
+* `OverlapResults`: 탐지할 방법을 모아놓은 변수
+* `Center`: 감지를 시작할 중앙 위치
+* `FQuat::Identity`: 탐색할 도형의 회전
+* `ECollisionChannel::ECC_Pawn`: 탐색할 대상의 콜리전 채널
+* `FCollisionShape::MakeSphere(512.0f)`: 탐색할 도형의 모양
+* `CollisionQueryParam`: 탐색 방법에 대한 설정 값을 모아둔 구조체
+
+그 아래의 코드는 탐지가 되었는지 확인하고 되었으면 탐지된 적들 중, 먼저 탐지된 적을 변수에 넣고 bIsDetected(기본값 false)를 true로 만들고 함수에서 나갑니다.
+
+![image](https://github.com/poi001/UnrealDefenceGame/assets/107660181/4d9a5ab2-d7e9-49f6-ae11-417eb5a1599d)
+
+DetectedEnemy는 DetectingEnemy와 매우 비슷하지만 다른 점이 있습니다. 다른 점은 반복문부터입니다.
+
+탐지된 적을 담은 변수와 이 함수에서 탐지된 적을 비교해서 같은 오브젝트라면 이 함수에서 나갑니다. 아니라면 bIsDetected를 false로 바꿉니다.
+
+이렇게 되면 적을 탐지하고 그 적이 타워 탐지 범위에 벗어 날 때까지 공격을 하다가 벗어나면 다른 적을 탐지하게 됩니다.
