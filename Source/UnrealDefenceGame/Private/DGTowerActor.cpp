@@ -46,10 +46,10 @@ void ADGTowerActor::BeginPlay()
 void ADGTowerActor::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
+	
 	if (bIsDetected)
 	{
-		UnDetectEnemy();
+		DetectedEnemy();
 		if (TowerStatComponent->GetAS() <= TickBasket)
 		{
 			TickBasket = 0.0f;
@@ -62,7 +62,7 @@ void ADGTowerActor::Tick(float DeltaTime)
 	}
 	else
 	{
-		DetectEnemy();
+		DetectingEnemy();
 		TickBasket = 0.0f;
 	}
 }
@@ -99,7 +99,7 @@ void ADGTowerActor::OnMaterialLoadCompleted()
 	Tower->SetMaterial(0, MaterialLoaded);
 }
 
-void ADGTowerActor::DetectEnemy()
+void ADGTowerActor::DetectingEnemy()
 {
 	TArray<FOverlapResult> OverlapResults;
 	FCollisionQueryParams CollisionQueryParam(NAME_None, false, GetOwner());
@@ -124,7 +124,7 @@ void ADGTowerActor::DetectEnemy()
 		}
 	}
 }
-void ADGTowerActor::UnDetectEnemy()
+void ADGTowerActor::DetectedEnemy()
 {
 	TArray<FOverlapResult> OverlapResults;
 	FCollisionQueryParams CollisionQueryParam(NAME_None, false, GetOwner());

@@ -56,8 +56,8 @@ private:
 	TSharedPtr<struct FStreamableHandle> MeshStreamingHandle;
 	TSharedPtr<struct FStreamableHandle> MaterialStreamingHandle;
 
-	void DetectEnemy();
-	void UnDetectEnemy();
+	void DetectingEnemy();
+	void DetectedEnemy();
 
 	void OnMeshLoadCompleted();
 	void OnMaterialLoadCompleted();
