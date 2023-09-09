@@ -157,3 +157,49 @@ DetectedEnemy는 DetectingEnemy와 매우 비슷하지만 다른 점이 있습�
 탐지된 적을 담은 변수와 이 함수에서 탐지된 적을 비교해서 같은 오브젝트라면 이 함수에서 나갑니다. 아니라면 bIsDetected를 false로 바꿉니다.
 
 이렇게 되면 적을 탐지하고 그 적이 타워 탐지 범위에 벗어 날 때까지 공격을 하다가 벗어나면 다른 적을 탐지하게 됩니다.
+
+### 데이터 테이블(csv)
+![image](https://github.com/poi001/UnrealDefenceGame/assets/107660181/2f52b277-d9f5-4b02-836d-12ad5b1cf14a)
+![image](https://github.com/poi001/UnrealDefenceGame/assets/107660181/c6c553bd-7853-4c1d-a8cb-a2ceadc166cd)
+
+위에는 적의 데이터를 밑에는 타워의 데이터(타입마다 다름)를 담은 csv파일입니다.
+
+csv파일을 엔진 컨텐츠 브라우저로 옮기면
+
+![image](https://github.com/poi001/UnrealDefenceGame/assets/107660181/f53cb8b7-4892-4f82-a781-6496d040b24e)
+![image](https://github.com/poi001/UnrealDefenceGame/assets/107660181/00b2bedf-059c-4e2d-b94c-fb3d3dcd40da)
+
+위와 같이 적용이 됩니다.
+
+이제 C++로 돌아가서 이 데이터 테이블을 적용 시키도록 해보겠습니다.
+
+![image](https://github.com/poi001/UnrealDefenceGame/assets/107660181/4e683cd7-de56-4e7b-b54c-5e2523f8db53)
+
+위에는 GameInstance에서 만든 적 데이터를 담을 구조체
+
+![image](https://github.com/poi001/UnrealDefenceGame/assets/107660181/5996d4c1-2919-4762-be32-892450aa7f30)
+
+위에는 GameInstance에서 만든 타워 데이터를 담을 구조체
+
+![image](https://github.com/poi001/UnrealDefenceGame/assets/107660181/568a5739-0bb6-4be1-9283-7cc741e5efa8)
+
+위에 함수들은 적 구조체와 타워 구조체를 얻어오는 Get함수들
+
+![image](https://github.com/poi001/UnrealDefenceGame/assets/107660181/21d08c77-1b5c-4869-9939-5ccfc6c44fb3)
+
+위에 변수들은 적과 타워(빨, 노, 초, 파, 검)의 데이터를 담을 변수들
+
+![image](https://github.com/poi001/UnrealDefenceGame/assets/107660181/69e9eec2-0a6d-4f73-a636-8aa416e600ba)
+
+아까 적용한 데이터들의 경로들을 변수에 집어넣는 코드
+
+![image](https://github.com/poi001/UnrealDefenceGame/assets/107660181/1721ca64-a629-488f-810e-843a7e607d1e)
+
+적의 데이터 테이블을 얻어오는 함수 정의 부분. FindRow를 사용하여 인자로 넣은 레벨에 해당하는 데이터를 리턴
+
+![image](https://github.com/poi001/UnrealDefenceGame/assets/107660181/723ecf25-a572-4325-bf39-4899a72e2b1c)
+
+타워들의 데이터 테이블을 얻어오는 함수 정의 부분. FindRow를 사용하여 인자로 넣은 레벨에 해당하는 데이터를 리턴.
+인자로 받은 타입을 switch문을 통해 구분하고 알맞은 타워 데이터를 반환
+
+위에 과정들을 통해 레벨과 타입에 따라 달라지는 스탯을 알맞게 얻어올 수 있습니다.
